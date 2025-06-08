@@ -1,0 +1,53 @@
+
+
+p ul li{
+    position: relative;
+}
+
+
+
+p span{
+    position: relative;
+}
+
+p span::after{
+    content: "";
+height: 10px;
+width: 10px;
+border-radius: 50%;
+background-color: rgb(43, 255, 0);
+
+position: absolute;
+left: -15px;
+top: 50%;
+transform: translateY(-50%);
+
+}
+
+p ul li::after{
+content: "";
+position: absolute;
+left: -20px;
+top: 50%;
+transform: translateY(-50%);
+border-bottom: 9px solid transparent;
+border-top: 9px solid transparent;
+border-left: 9px solid rgb(255, 0, 0);
+border-right: 9px solid transparent;
+}
+
+.form{
+    box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form input{
+    border: none;
+    outline: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.7s ;
+}
+
+.form input:focus{
+    transform: scale(1.03);
+    border-top: 1px solid green;
+}

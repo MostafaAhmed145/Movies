@@ -1,0 +1,30 @@
+/* 
+
+.ratingSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* margin:; */
+  }
+  
+  .rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #333;
+    /* padding: 20px; */
+    border-radius: 15px;
+    box-shadow: inset 0px 3px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* قيمة التقييم */
+  .ratingValue {
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 10px;
+  }
+   */
+
+  

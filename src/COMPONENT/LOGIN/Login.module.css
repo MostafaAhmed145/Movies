@@ -1,0 +1,49 @@
+
+
+form input{
+    border: 2px solid #ccc;
+    outline: none;
+    transition: 0.7s all;
+    border-radius: 20px;
+}
+
+form input:focus{
+    border-color: rgb(8, 168, 8);
+}
+
+
+/* 
+form label{
+    font-size: 1rem;
+    color: #aaa;
+    pointer-events: none;
+
+} */
+
+
+.password ,
+.email
+{
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    outline: none;
+    color: #333;
+    transition: all 0.7s;
+}
+
+
+
+.fancyForm{
+box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.password:focus ,
+.email:focus{
+transform: scale(1.03);
+border-top: 1px solid green;
+}

@@ -1,0 +1,25 @@
+/* 
+.ul{
+    flex-wrap: wrap;
+} */
+
+.ul li{
+    position: relative;
+}
+
+.ul li{
+    background-color: #00d30b;
+}
+
+.ul li::after {
+    content: "";
+
+position: absolute;
+left: -20px;
+top: 50%;
+transform: translateY(-50%);
+border-bottom: 9px solid transparent;
+border-top: 9px solid transparent;
+border-left: 9px solid rgb(255, 0, 0);
+border-right: 9px solid transparent;
+}
