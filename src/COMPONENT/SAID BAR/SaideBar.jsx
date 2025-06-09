@@ -114,7 +114,7 @@ export function SaideBar() {
               </div>
 
               <div className={SaideBarCss.basr}>
-                {openSaieBar == false ? <i onClick={()=>{setOpenSaieBar(true)}} class="fa-solid fa-bars fa-2x "></i> : <i onClick={ ()=>{setOpenSaieBar(false)} } class="fa-solid fa-xmark fa-2x"></i>  }
+                {openSaieBar === false ? <i onClick={()=>{setOpenSaieBar(true)}} class="fa-solid fa-bars fa-2x "></i> : <i onClick={ ()=>{setOpenSaieBar(false)} } class="fa-solid fa-xmark fa-2x"></i>  }
               </div>
 
               <div className={SaideBarCss.shear + " flex-column text-center"}>
