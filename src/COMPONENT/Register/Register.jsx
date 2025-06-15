@@ -9,7 +9,7 @@ import RegisterCss from "./register.module.css"
 import { useFormik } from 'formik'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { InfinitySpin, RotatingLines } from 'react-loader-spinner';
+import {  RotatingLines } from 'react-loader-spinner';
 
 
 
@@ -54,8 +54,6 @@ let myFormik = useFormik( {
 
         setIsLoding(true)
 
-
-        console.log("values" , values);
 
         const { data } = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
         .then( (res)=>{

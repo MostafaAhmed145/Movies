@@ -1,9 +1,9 @@
 
 
 
-import React, { Component, PureComponent } from 'react'
-import { Link, Outlet } from 'react-router-dom'
-import { SaideBar } from '../SAID BAR/SaideBar'
+import React, { Component } from 'react'
+import {  Outlet } from 'react-router-dom'
+
 import NavBar from '../NAV BAR/NavBar'
 
 export class LeyOet extends Component {
@@ -14,7 +14,7 @@ export class LeyOet extends Component {
 
         
         
-        {/* <SaideBar/> */}
+
 
         <NavBar/>
 

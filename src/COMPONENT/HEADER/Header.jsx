@@ -16,8 +16,8 @@ function Header() {
     <div className={ HeaderCss.HeaderHome + ' bg-dark vh-100 d-flex justify-content-center align-items-center' }>
             <div data-aos="zoom-in-up" className="text text-white text-center">
                 
-                <h1 className=' fw-bolder'>Best Movies Here</h1>
-                <p className="mb-4 text-lg">New, Exclusive & Exciting - Get Ready to Watch!</p>
+                <h1 className=' fw-bolder display-5'>Best Movies Here</h1>
+                <p className="mb-4 text-lg fs-5">New, Exclusive & Exciting - Get Ready to Watch!</p>
                 
             </div>
     </div>

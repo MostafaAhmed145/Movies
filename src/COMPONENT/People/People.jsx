@@ -7,7 +7,7 @@ import { useQuery } from 'react-query'
 import Loading from '../LOADING/Loading'
 import Aos from 'aos'
 import "aos/dist/aos.css"
-// import PEPOLECSS from "./pepole.module.css"
+import PEPOLECSS from "./pepole.module.css"
 import { Link } from 'react-router-dom'
 import Errors from '../ERRORS/Errors'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -98,7 +98,7 @@ function People() {
 
                 <div className={" search my-5"}>
                 <form data-aos="flip-up" action="" className=' bg-white col-lg-6 col-md-12 m-auto p-1 rounded-top-5'>
-                <input value={query} placeholder='ابحث عن ممثل...' onChange={  (e)=>{setQuery(e.target.value) } } type="text" className=' w-100 m-auto p-2 rounded-5 bg-transparent text-black' />
+                <input value={query} placeholder='ابحث عن ممثل...' onChange={  (e)=>{setQuery(e.target.value) } } type="text" className={PEPOLECSS.inputSearch + ' w-100 m-auto p-2 rounded-5 bg-transparent text-black'} />
                 </form>
 
 

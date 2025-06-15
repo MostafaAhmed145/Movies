@@ -50,7 +50,7 @@ function Detailse() {
 
 
     <div className="container my-4 p-4 text-white">
-        <h1  data-aos="flip-up" className=' mb-4 h2'>{data.data.tagline }</h1>
+        
         <div data-aos="zoom-in-up" className={DetailseCss.row + " row py-5 rounded-2 bg-white "}>
             <div className="col-lg-4 col-md-12 text-center position-relative">
                 <figure className=' w-100 '>

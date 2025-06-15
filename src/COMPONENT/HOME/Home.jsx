@@ -9,17 +9,13 @@ import { Search } from '../SEARCH/Search'
 import Aos from 'aos'
 import "aos/dist/aos.css"
 
-
-
-
-
-
 import React, { useEffect  } from 'react'
 import { useQuery } from 'react-query'
 import Errors from '../ERRORS/Errors'
 import Header from '../HEADER/Header'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "react-lazy-load-image-component/src/effects/blur.css"
+import PhotosSlider from '../PHOTOS-SLIDER/PhotosSlider'
 
 export function Home() {
 
@@ -55,8 +51,11 @@ export function Home() {
             <Header/>
 
 
+            <PhotosSlider/>
+
+
      { data.data.results.length > 0 ? <div  className="container-fluid  py-5 px-4">
-            <div className="row gy-3 ">
+            <div className={homeCss.row + " row gy-3 "}>
 
             <Search/>
 

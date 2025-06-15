@@ -1,0 +1,27 @@
+.linkNav {
+    position: relative;
+    color: white;
+    transition: all 1s;
+}
+
+.linkNav::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background-color: #dc3545;
+    bottom: -1px;
+    transition: all 1s;
+    transform-origin: right;
+    left: 50%;
+    right: 50%;
+
+}
+
+.linkNav:hover {
+    color: #dc3545;
+}
+
+.linkNav:hover::after {
+    left: 0%;
+    right: 0%;
+}

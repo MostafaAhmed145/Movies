@@ -1,0 +1,54 @@
+
+
+/* .modalBody{ */
+    /* overflow: hidden;
+}
+
+.modalBody:hover{
+    overflow: initial;
+} */
+
+
+.modalBody .text{
+    opacity: 0;
+    animation: textSlideIn 2s forwards;
+    animation-timing-function: linear;
+    transform: translateY(-50%);
+
+
+background-color: rgba(0, 0, 0, 0.5); /* أسود شفاف */
+  color: white;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  backdrop-filter: blur(6px); /* لو فيه خلفية وعايز تأثير زجاجي */
+  -webkit-backdrop-filter: blur(6px); /* دعم للـ Safari */
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+    
+}
+
+@keyframes textSlideIn {
+    50%{
+        transform: translateY(-100%);
+    }
+
+    100%{
+        transform: translateY(-50%);
+        opacity: 1;
+
+    }
+
+}
+
+
+.SwiperSlide{
+    transition: 0.7s all;
+}
+
+.SwiperSlide:hover{
+    transform: scale(1.1);
+}
+
+

@@ -3,6 +3,7 @@
 import React, { useContext } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { myContext } from '../CONTEXT/AuseContext'
+import NavBarCss from "./navBar.module.css"
 
 function NavBar() {
 
@@ -31,19 +32,19 @@ function NavBar() {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav align-items-center">
         <li class="nav-item my-1">
-        <NavLink className=' py-1 px-2 rounded-1' to="Home"> HOME </NavLink>
+        <NavLink className={NavBarCss.linkNav + ' py-1 px-2 rounded-1 text-decoration-none '} to="Home"> HOME </NavLink>
         </li>
         <li class="nav-item my-1">
-        <NavLink className=' py-1 px-2 rounded-1' to="Tranding"> Tranding</NavLink>
+        <NavLink className={NavBarCss.linkNav + ' py-1 px-2 rounded-1 text-decoration-none '} to="Tranding"> Tranding</NavLink>
         </li>
         <li class="nav-item my-1">
-        <NavLink className=' py-1 px-2 rounded-1'  to="TopRated">Top Rated</NavLink>
+        <NavLink className={NavBarCss.linkNav + ' py-1 px-2 rounded-1 text-decoration-none '}  to="TopRated">Top Rated</NavLink>
         </li>
         <li class="nav-item my-1">
-        <NavLink className=' py-1 px-2 rounded-1'  to="Upcoming"> Upcoming</NavLink>
+        <NavLink className={NavBarCss.linkNav + ' py-1 px-2 rounded-1 text-decoration-none '}  to="Upcoming"> Upcoming</NavLink>
         </li>
         <li class="nav-item my-1">
-        <NavLink className=' py-1 px-2 rounded-1 '  to="People"> People</NavLink>
+        <NavLink className={ NavBarCss.linkNav + ' py-1 px-2 rounded-1 text-decoration-none  '}  to="People"> People</NavLink>
         </li>
         
         

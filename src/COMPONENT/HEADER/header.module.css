@@ -1,4 +1,4 @@
 .HeaderHome{
-    background-image: url("../imges/pexels-tima-miroshnichenko-7991579.jpg");
+    background-image:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)) , url("../imges/pexels-tima-miroshnichenko-7991579.jpg");
     background-size: 100% 100%;
 }
