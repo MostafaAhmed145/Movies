@@ -9,18 +9,20 @@ import { Search } from '../SEARCH/Search'
 import Aos from 'aos'
 import "aos/dist/aos.css"
 
-import React, { useEffect  } from 'react'
+import React, { useContext, useEffect  } from 'react'
 import { useQuery } from 'react-query'
 import Errors from '../ERRORS/Errors'
 import Header from '../HEADER/Header'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "react-lazy-load-image-component/src/effects/blur.css"
 import PhotosSlider from '../PHOTOS-SLIDER/PhotosSlider'
+import ButtonScrolTop from '../BUTTON-SCROL/ButtonScrolTop'
+import { myContext } from '../CONTEXT/AuseContext'
 
 export function Home() {
 
 
-
+let { btnscroll , setBtnscroll } = useContext(myContext)
 
     async function grtDataMovie(){
 
@@ -34,6 +36,7 @@ export function Home() {
         
         useEffect( ()=>{
             Aos.init( {duration : 2500} )
+            setBtnscroll()
         } , [] )
         
         if (isLoading ) {
@@ -123,7 +126,7 @@ export function Home() {
 
 
 
-             
+             <ButtonScrolTop/>
 
 
     

@@ -1,7 +1,7 @@
 
 
 
-import React, {  useRef, useState } from 'react'
+import React, {  useEffect, useRef , useState } from 'react'
 
 import LoginCss from "./Login.module.css"
 import { useFormik } from 'formik'
@@ -14,6 +14,13 @@ import {  RotatingLines } from 'react-loader-spinner';
 
 
 export function Login() {
+
+      let refrance = useRef(null)
+    
+
+      useEffect( ()=>{
+          refrance.current.focus()
+         }  , [])
 
    let [ isSacces , setIsSacces ]  = useState(false)
 
@@ -154,7 +161,7 @@ let myFormik = useFormik( {
                     
                     <div>
                         {/* <label className={LoginCss.label + " px-2"} htmlFor="email">Email</label> */}
-                    <input  onBlur={myFormik.handleBlur} className={LoginCss.email + " p-1  w-100 mb-2" } placeholder='Email' value={myFormik.values.email} onChange={myFormik.handleChange} type="email" id='email'  />
+                    <input  ref={refrance}  onBlur={myFormik.handleBlur} className={LoginCss.email + " p-1  w-100 mb-2" } placeholder='Email' value={myFormik.values.email} onChange={myFormik.handleChange} type="email" id='email'  />
                     
                     {myFormik.values.email !== false && myFormik.touched.email ? <p className=' text-danger  w-100 '>{myFormik.errors.email}</p> : "" }
                     

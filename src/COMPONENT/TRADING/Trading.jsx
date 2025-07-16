@@ -12,6 +12,7 @@ import { Search } from '../SEARCH/Search'
 import Errors from '../ERRORS/Errors'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "react-lazy-load-image-component/src/effects/blur.css"
+import ButtonScrolTop from '../BUTTON-SCROL/ButtonScrolTop'
 
 function Trading() {
 
@@ -103,6 +104,7 @@ if( isError){
     </div> : ""}
     
     
+    <ButtonScrolTop/>
 
     </>
 }

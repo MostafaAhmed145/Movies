@@ -45,10 +45,18 @@ background-color: rgba(0, 0, 0, 0.5); /* أسود شفاف */
 
 .SwiperSlide{
     transition: 0.7s all;
+    
 }
 
 .SwiperSlide:hover{
     transform: scale(1.1);
+}
+
+
+.headerImg{
+    height: 300px;
+    width: 300px;
+    background-color: red;
 }
 
 

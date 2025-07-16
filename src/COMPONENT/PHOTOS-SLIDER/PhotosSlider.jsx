@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Navigation , Autoplay  } from 'swiper/modules';
+import { Navigation , Autoplay  , EffectCoverflow } from 'swiper/modules';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import Loading from '../LOADING/Loading';
@@ -16,6 +16,9 @@ import "react-lazy-load-image-component/src/effects/blur.css"
 function PhotosSlider() {
 
     let [ selectedItem , setSelectedItem] = useState(null)
+        
+
+ 
 
 async function sliderImage() {
     return  axios.get("https://api.themoviedb.org/3/trending/all/week?api_key=eba8b9a7199efdcb0ca1f96879b83c44")
@@ -33,7 +36,7 @@ if (isError) {
     return < Errors refetch={refetch}/>
 }
 
-console.log(data.data);
+ 
 
 
     return <>
@@ -42,10 +45,11 @@ console.log(data.data);
 
 
 
+
 <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
+    <div className="modal-content">
+      <div className="modal-header">
         <h2 className="modal-title fs-5" id="exampleModalLabel">
             {selectedItem != null ? selectedItem.title  || selectedItem.name : "not title"}
         </h2>
@@ -69,9 +73,18 @@ console.log(data.data);
 
 
 
-     <div className=' p-2'>
-        <Swiper navigation={true}
-        modules={[Navigation, Autoplay]}
+     <div className=' p-2 '>
+        <Swiper
+           navigation={true}
+  modules={[Navigation, Autoplay, EffectCoverflow]} // ← مهم جدًا
+  effect="coverflow"
+  coverflowEffect={{
+    rotate: 30,
+    depth: 100,
+    stretch: 50,
+    slideShadows: true,
+  }}
+
         slidesPerView={5}
         spaceBetween={15}
         autoplay={{ delay: 2500, disableOnInteraction: false }}
@@ -82,18 +95,19 @@ console.log(data.data);
           768: { slidesPerView: 3 },
           1024: { slidesPerView: 5 },
         }}
-          className="mySwiper  rounded-3 mt-2" >
+          className="mySwiper  rounded-3  " >
         
                     {data.data.results.map( (tredingSlider)=>{
-                        return <SwiperSlide key={tredingSlider.id} style={{ "height" : "300px" }} className={PhotosSliderCss.SwiperSlide + ' rounded-3'}>
-                             <LazyLoadImage onClick={()=> setSelectedItem(tredingSlider)} data-bs-toggle="modal" data-bs-target="#exampleModal" className=' w-100 rounded-3' style={{"cursor" : "pointer"}} src={"https://image.tmdb.org/t/p/original" + tredingSlider.poster_path} alt={tredingSlider.title} />
-                               
+                        return <SwiperSlide key={tredingSlider.id} style={{ "height" : "300px" }} className={PhotosSliderCss.SwiperSlide + ' rounded-5 '}>
+                             <LazyLoadImage onClick={()=> setSelectedItem(tredingSlider) } data-bs-toggle="modal" data-bs-target="#exampleModal" className=' w-100 rounded-3 overflow-hidden' style={{"cursor" : "pointer"}} src={"https://image.tmdb.org/t/p/original" + tredingSlider.poster_path} alt={tredingSlider.title} />
                         </SwiperSlide>
                     } )}
-        
+      
     
       </Swiper>
      </div>
+
+    
     </>
 }
 

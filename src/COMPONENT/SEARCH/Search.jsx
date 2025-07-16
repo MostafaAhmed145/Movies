@@ -3,7 +3,8 @@
 
 
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import debounce from "lodash.debounce";
 
 import SearchCss from "./search.module.css"
 import axios from 'axios'
@@ -23,44 +24,54 @@ export function Search() {
 
 
    
-    useEffect( ()=>{
 
 
-            let  getNameMoviesSearch = async ()=> {
+            let  getNameMoviesSearch = useCallback (
+                debounce( async ( searchItem )=>{
+                       
 
 
-                try{
+                     try{
 
-                let response = await axios.get( `https://api.themoviedb.org/3/search/movie?api_key=eba8b9a7199efdcb0ca1f96879b83c44` , {
+                 let response = await axios.get( `https://api.themoviedb.org/3/search/movie?api_key=eba8b9a7199efdcb0ca1f96879b83c44` , {
                       params: {
-                          query : query,
+                        query : searchItem ,
                           language: 'ar' 
                         }
             
                         
-                  })
+              })
 
-                  setKeywords(response.data.results)
+                setKeywords(response.data.results)
                   
                   
-
            
-                }
-
-
-                catch(err){
-                    console.log(err);
+              }
+              catch(err){
+                  console.log(err);
                     
-                }
-        }
+              }
 
-        getNameMoviesSearch()
+
+                } , 500 ), []
+
+            )
+
+            useEffect( ()=>{
+
+                 if (query.trim() !== "") {
+                getNameMoviesSearch(query); // تبعت قيمة query كـ باراميتر
+            }
+
+            } , [query , getNameMoviesSearch] )
+        // getNameMoviesSearch()
   
-            Aos.init( {duration : 3000} )
+        //     Aos.init( {duration : 3000} )
 
-    } , [query])
 
-        
+
+
+
 
 
 
@@ -68,7 +79,7 @@ export function Search() {
     
     <div  data-aos="flip-up" className="container">
     <div className={SearchCss.searchContainer + " mt-3"}>
-    <input  value={query} onChange={ (e)=>  setQuery(e.target.value)  } type="text" className={SearchCss.searchInput } placeholder="ابحث عن فيلم..." />
+    <input  value={query} onChange={ (e)=>   setQuery(e.target.value)  } type="text" className={SearchCss.searchInput + " border" } placeholder="ابحث عن فيلم..." />
     
     </div>
     <div className="row">
@@ -81,7 +92,7 @@ export function Search() {
 
 
                            <div className='border-bottom p-2 rounded shadow '>
-                             <Link to={`/Detailse/${move.id}`}>
+                             <Link to={`/Detailse/${movie.id}`}>
                             
                             <div data-aos="zoom-in-up" className={SearchCss.innar + " rounded-top-3  position-relative"}>
 

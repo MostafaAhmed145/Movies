@@ -12,7 +12,7 @@ import AuseContextProvider from './COMPONENT/CONTEXT/AuseContext';
 import ProtectedRoute from './COMPONENT/Protected Route/ProtectedRoute';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Trading from './COMPONENT/TRADING/Trading';
-import People from './COMPONENT/People/People';
+import People from './COMPONENT/People/Peopler';
 import Actor from './COMPONENT/ACTOR/Actor';
 let NowPlaying = React.lazy( ()=> import("./COMPONENT/NOWPLAYING/NowPlaying") )
 let Detailse = React.lazy( ()=> import("./COMPONENT/DETAILSE/Detailse") )

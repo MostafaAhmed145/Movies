@@ -1,7 +1,7 @@
 
 
 
-import React, { Children, createContext, useState } from 'react'
+import React, {  createContext, useState } from 'react'
 
  export  let myContext   = createContext( )
 
@@ -9,9 +9,10 @@ import React, { Children, createContext, useState } from 'react'
 
 
      let [ Token , setToken ] =   useState(null)
+     let [ btnscroll , setBtnscroll ] =   useState(null)
 
 
-    return <myContext.Provider value={ { myToken : Token  , setToken} } >
+    return <myContext.Provider value={ { myToken : Token  , setToken , btnscroll , setBtnscroll } } >
     
        {children}
 

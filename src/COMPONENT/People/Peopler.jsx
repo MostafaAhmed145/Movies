@@ -2,7 +2,7 @@
 
 
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useQuery } from 'react-query'
 import Loading from '../LOADING/Loading'
 import Aos from 'aos'
@@ -12,27 +12,25 @@ import { Link } from 'react-router-dom'
 import Errors from '../ERRORS/Errors'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import "react-lazy-load-image-component/src/effects/blur.css"
+import debounce from "lodash.debounce";
+import ButtonScrolTop from '../BUTTON-SCROL/ButtonScrolTop'
 
-function People() {
+ function Peopler() {
 
     let [ query , setQuery] = useState()
     let [ results , setResults] = useState()
 
     
 
-    useEffect( ()=>{
-        Aos.init( {duration : 2500} )
+   
+        let getNameActors = useCallback(  
+            debounce( async (searchUser)=>{
 
-
-        async function getNameActors() {   
-
-
-        
-            try{
+  try{
 
                 let response = await axios.get( `https://api.themoviedb.org/3/search/person?api_key=eba8b9a7199efdcb0ca1f96879b83c44` , {
                       params: {
-                          query : query,
+                          query : searchUser,
                           language: 'ar' 
                         }
             
@@ -46,24 +44,20 @@ function People() {
                     console.log(err);
                 }
 
-        }
-        
+
+            } , 500 ) , []
+        )
+
+        useEffect( ()=>{ 
+            Aos.init( {duration : 2500} )
             
-            
-    
-
-    
 
 
-        
-            
-                
+            if (query?.trim()  !== "") {
+                getNameActors(query)
+            }
 
-
-        getNameActors()
-
-        
-    }  , [query])
+        } ,  [query , getNameActors ] )
 
 
     
@@ -170,11 +164,12 @@ function People() {
 
                 
     </div>
+
+    <ButtonScrolTop/>
     
     </>
 }
 
 
 
-
-export default People
+export default Peopler

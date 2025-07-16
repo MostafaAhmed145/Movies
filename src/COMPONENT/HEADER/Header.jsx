@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import HeaderCss from "./header.module.css"
 import Aos from 'aos'
 import "aos/dist/aos.css"
-import { Search } from '../SEARCH/Search'
 
 
 function Header() {
+
 
      useEffect( ()=>{
                 Aos.init( {duration : 2500} )

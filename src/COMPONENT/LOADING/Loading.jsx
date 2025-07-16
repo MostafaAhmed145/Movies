@@ -1,9 +1,7 @@
 
 
 
-import React from 'react'
-import { ColorRing, RotatingLines } from 'react-loader-spinner'
-
+// 
 
 export default function Loading() {
     return <>
