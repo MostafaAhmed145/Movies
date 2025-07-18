@@ -52,7 +52,7 @@ export function Upcoming() {
                         {data.data.results.map((upcoming) => {
                              return   <div  key={upcoming.id } className= {UpcomingCss.mainCol + " col-lg-3 col-md-6 col-sm-12 rounded  p-3 "}>
 
-                           <div className='border-bottom  rounded shadow '>
+                           <div className='border-bottom  rounded shadow border '>
                              <Link to={`/Detailse/${upcoming.id}`}>
                             
                             <div data-aos="zoom-in-up" className={UpcomingCss.innar + " rounded-top-3  position-relative"}>
@@ -79,22 +79,16 @@ export function Upcoming() {
                             </Link>
 
                             
-                                            <div className= "  d-flex justify-content-between bg-dark p-1" >
-                                            <Link to={`/NowPlaying/${upcoming.id}/${upcoming.name  ? upcoming.name : upcoming.title}`} className=' text-decoration-none text-white border p-1'>
-                                            Live Video
-                                                <i class="fa-brands fa-youtube ms-2" style={{"color": "#ff0505"}}>
+                                            <div className= "  d-flex flex-column rounded-bottom-2  bg-dark p-2" >
+                                                <h6 className=' d-flex align-items-center text-white '> <i class="fa-solid fa-star" style={{"color": "gold"}}></i> {upcoming.vote_average}</h6>
+                                                <h3 className=' h6 text-white'>{upcoming.name  ? upcoming.name : upcoming.title}</h3>
+                                            <Link to={`/NowPlaying/${upcoming.id}/${upcoming.name  ? upcoming.name : upcoming.title}`} className={  UpcomingCss.watchTheMovie + ' text-decoration-none text-white bg-danger  rounded-2 p-1 text-center' }>
+                                                Live Video
+                                                <i class="fa-brands fa-youtube ms-2" >
                                                 </i> 
                                              </Link> 
 
-                                             <div className={UpcomingCss.rating + "  d-flex justify-content-center bg-danger align-items-center border px-2 pt-2 "}>
-                                            <h6 className=' d-flex align-items-center text-white '> <i class="fa-solid fa-star" style={{"color": "gold"}}></i> {upcoming.vote_average}</h6>
                                             </div>
-
-                                          
-
-                                            
-                                            
-                                    </div>
                             </div>
 
                     

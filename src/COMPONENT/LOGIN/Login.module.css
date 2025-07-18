@@ -44,6 +44,6 @@ box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.1);
 
 .password:focus ,
 .email:focus{
-transform: scale(1.03);
+/* transform: scale(1.03); */
 border-top: 1px solid green;
 }

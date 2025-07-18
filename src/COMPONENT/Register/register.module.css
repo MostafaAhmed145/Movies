@@ -48,6 +48,6 @@ border-right: 9px solid transparent;
 }
 
 .form input:focus{
-    transform: scale(1.03);
+    /* transform: scale(1.03); */
     border-top: 1px solid green;
 }

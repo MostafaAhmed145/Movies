@@ -16,9 +16,11 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 
 
+
 function Detailse() {
 
     let [ detailseMovei , setDetailseMovei ] = useState(null)
+    let [ idCastMovie , setIdCastMovie] = useState(null)
 
     let { id } = useParams()
 
@@ -43,43 +45,49 @@ async function similar() {
 }
 
 function getReviews() {
-  return axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=eba8b9a7199efdcb0ca1f96879b83c44`);
+  return axios.get(`https://api.themoviedb.org/3/movie/${ detailseMovei?.id ? detailseMovei?.id : id }/reviews?api_key=eba8b9a7199efdcb0ca1f96879b83c44`);
+}
+
+function getCast() {
+    return axios.get(`https://api.themoviedb.org/3/movie/${ idCastMovie ? idCastMovie :  id }/credits?api_key=eba8b9a7199efdcb0ca1f96879b83c44`);
 }
 
 let {  data , isError , isLoading , refetch} = useQuery("getDetailseMovei" , getDetailseMovei)
 
+console.log("sjhsw" , idCastMovie );
+
+
 let dataSimilar = useQuery( "similar" , similar )
 
-let { data: reviewsData, isLoading: isReviewsLoading, isError: isReviewsError } = useQuery("reviews", getReviews);
+let { data: reviewsData, isLoading: isReviewsLoading, isError: isReviewsError } = useQuery( [ "reviews", detailseMovei?.id || id ] , getReviews);
 
-    if (dataSimilar.isError) {
-        return <Errors refetch={refetch}/>
-    }
-
-    if (dataSimilar.isLoading) {
-        return <Loading/>
-    }
-
-    if (isReviewsLoading) {
-        return <Loading/>
-    }
-
-  
-    if (isLoading) {
-        return <Loading/>
-    }
+let { data : getDataCast , isLoading : getLoading   } = useQuery( ["getCast" , idCastMovie || id] , getCast )
 
 
 
-       if (isError) {
-            return <Errors refetch={refetch}/>
-        }
 
-        if (isReviewsError) {
-            return <Errors refetch={refetch}/>
-        }
 
-        const moveis = detailseMovei !== null ? detailseMovei : data.data
+
+                if (dataSimilar.isLoading || isReviewsLoading || isLoading || getLoading ) {
+                    return <Loading/>
+                }
+
+                if (dataSimilar.isError || isError  || isReviewsError ) {
+                    return <Errors refetch={refetch}/>
+                }
+
+
+
+
+                const moveis = detailseMovei !== null ? detailseMovei : data.data
+
+
+                let toScrollTop = ()=>{
+                    window.scrollTo( {
+                        top : 0 , 
+                        behavior : 'smooth'
+                    } )
+                }
 
 
 
@@ -89,11 +97,12 @@ let { data: reviewsData, isLoading: isReviewsLoading, isError: isReviewsError } 
     
 
     return <>
+   
 
 
-    <div className="container my-4 p-4 text-white ">
+    <div className="container bg-light my-4 rounded border p-4 ">
         
-        <div data-aos="zoom-in-up" className={DetailseCss.row + " row py-5  bg-white "}>
+        <section data-aos="zoom-in-up" className={DetailseCss.row + " row py-5  bg-white rounded-2 border "}>
             <div className="col-lg-4 col-md-12 text-center ">
                 <figure className=' w-100 '>
                     {detailseMovei == null ? <LazyLoadImage className=' w-100 rounded-3' src={"https://image.tmdb.org/t/p/original" + data.data.backdrop_path} alt={data.data.original_title} /> : <LazyLoadImage className=' w-100 rounded-3' src={"https://image.tmdb.org/t/p/original" + detailseMovei.backdrop_path} alt={data.data.original_title} />}
@@ -102,22 +111,83 @@ let { data: reviewsData, isLoading: isReviewsLoading, isError: isReviewsError } 
             </div>
             <div className="col-lg-8">
                     <figcaption>
-                        <h2 className=' text-danger'>{moveis.original_title} </h2>
-                        <p className=' text-black'>{moveis.overview}</p>
-                        <Link className=' py-2' to={moveis.homepage}>{moveis.homepage}</Link>
+                        <h2 className=' text-primary fst-italic'>{moveis.original_title} </h2>
+                        <p className=' text-secondary'>{moveis.overview}</p>
+                        <Link className=' py-2 mb-2 btn btn-outline-primary text-capitalize' to={moveis.homepage}>to home page</Link>
                         
 
-                        <div className={DetailseCss.contant + "  d-flex justify-content-between text-white p-1"}>
-                            <h5 className=' p-2  text-center col-lg-3 col-12 h6 bg-danger text-white '>popularity : {moveis.popularity}</h5>
-                            <h5 className=' p-2  text-center col-lg-3 col-12 h6 bg-danger text-white'>Vote Count : {moveis.vote_count  }</h5>
-                            <h5  className=' p-2  text-center col-lg-3 col-12 h6 bg-danger text-white'>Average<i class="fa-solid fa-star" style={{"color": "gold"}}></i><span style={{"color": "gold"}}>{moveis.vote_average  }</span>  </h5>
+                        <div className={DetailseCss.contant + "  d-flex justify-content-between text-white p-1 bg-white"}>
+                            <div className='  p-2  text-center col-lg-3 col-12 h6 bg-light text-black rounded'>
+                                <span className=' p-2'>popularity</span>
+                                <h5 className=' text-primary'>  {moveis.popularity}</h5>
+                            </div>
+
+                            <div className='  p-2  text-center col-lg-3 col-12 h6 bg-light text-black rounded'>
+                                <span className=' p-2'>Vote Count</span>
+                                <h5 className=' text-primary'>  {moveis.vote_count}</h5>
+                            </div>
+
+                            <div className='  p-2  text-center col-lg-3 col-12 h6 bg-light text-black rounded'>
+                                <span className=' p-2'>Average Rating</span>
+                                <h5 className=' text-warning'> <i className="fa-solid fa-star me-1"></i>{moveis.vote_average} </h5>
+                            </div>
 
                         </div>
                     </figcaption>
             </div>
 
-             <div className='  mt-5 p-2'>
-                <h3 className=' text-black fa-italic text-capitalize'>Similar movies</h3>
+
+
+
+            
+
+
+        </section>
+            
+
+        <div>
+        </div>
+
+            
+
+
+              <div className=' mt-5 p-2 '>
+                            <h3 className=' d-block text-black text-capitalize p-2 fst-italic'>cast Movie</h3>
+                             <Swiper
+                             autoplay = { { delay : 2000 ,  disableOnInteraction : false } }
+                                    effect="coverflow"
+                                    grabCursor={true}
+                                    centeredSlides={true}
+                                    slidesPerView={4}   
+                                    coverflowEffect={{
+                                        rotate: 20,
+                                        stretch: 0,
+                                        depth: 100,
+                                        modifier: 1.5,
+                                        slideShadows: true,
+                                    }}
+                                    modules={[EffectCoverflow , Autoplay ,]}
+                                    className="mySwiper"
+                                    >
+
+
+                                    {getDataCast.data.cast.map( (castMovie)=>{
+                                        
+                                         return <SwiperSlide className=' rounded-2'>
+                                            <figure>
+                                                <LazyLoadImage loading='lazy'  src={"https://image.tmdb.org/t/p/original" + castMovie.profile_path} alt={castMovie.name} className=' w-100 rounded-2' />
+                                            </figure>
+                                            </SwiperSlide>
+                                         
+                                    } ) }
+                                    
+                                    </Swiper>
+                                      
+                        </div>
+
+
+                         <div className='  mt-5 p-2'>
+                {reviewsData.data.results.length > 0 ? <h3 className=' text-black fa-italic text-capitalize fst-italic'>Similar movies</h3> : ""}
                 <Swiper
                 className={DetailseCss.Swiper + ' swiper'}
                     navigation={true}
@@ -142,7 +212,7 @@ let { data: reviewsData, isLoading: isReviewsLoading, isError: isReviewsError } 
         }} >
                     {dataSimilar.data.data.results.map( (similarMovei)=>{
                         return <SwiperSlide key={similarMovei.id} className=' h-100 '>
-                                    <figure onClick={ ()=>  {setDetailseMovei(similarMovei) }} >
+                                    <figure onClick={ ()=>  { setDetailseMovei(similarMovei) ; setIdCastMovie(similarMovei.id ) ; toScrollTop() }} >
                                         <LazyLoadImage className=' w-100 rounded-3 h-100' src={"https://image.tmdb.org/t/p/original" + similarMovei.backdrop_path} loading='lazy' alt={similarMovei.original_title}  />
 
                                     </figure>
@@ -156,8 +226,8 @@ let { data: reviewsData, isLoading: isReviewsLoading, isError: isReviewsError } 
 
 
 
-            <div className=' mt-3 text-black'>
-                {reviewsData.data.results.length > 0 ? <h2>User Reviews</h2> : ""}
+        <div className=' mt-3 text-black'>
+                {reviewsData.data.results.length > 0 ? <h2 className=' fst-italic'>User Reviews</h2> : ""}
                 
                 { reviewsData.data.results.map( (riview)=> <div key={riview.id} className=' rounded bg-light border my-2 p-2'>
                     <div className=' userData d-flex'>
@@ -184,13 +254,6 @@ let { data: reviewsData, isLoading: isReviewsLoading, isError: isReviewsError } 
                     </div>
             </div>  )}
             </div>
-
-
-        </div>
-            
-
-        <div>
-        </div>
 
             <div className=' w-100 mt-2'>
                     <button onClick={ NavigateM } className=' btn btn-danger text-white w-100 '>Back to Home Page</button>

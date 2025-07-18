@@ -28,10 +28,6 @@ export function Login() {
 
    let [ isLoding , setIsLoding ] = useState(false)
 
-//    let { myToken , setToken } =  useContext( myContext )
-
-
-  
 
 
 
@@ -68,7 +64,7 @@ let myFormik = useFormik( {
                 setIsSacces(false)
                 setIsLoding(false)
                 myNavegeate("/Home")
-            } , 3000 )
+            } , 1500 )
             
 
 

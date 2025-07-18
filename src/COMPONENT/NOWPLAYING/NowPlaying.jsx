@@ -5,6 +5,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import Loading from '../LOADING/Loading'
 import { Link,  useParams } from 'react-router-dom'
+import NowPlayingCss from "./nowPlaying.module.css"
 
 
 export function NowPlaying() {
@@ -34,7 +35,7 @@ export function NowPlaying() {
 
 
     <div className="container mt-4">
-    <h1  className=' py-4 fw-bold  m-auto  '>movie : {myParams.title}</h1>
+    <h1  className={NowPlayingCss.title + ' py-4 fw-bold  m-auto  ' }>movie : {myParams.title}</h1>
         <div className="row">
             <div className="col-12 text-center viduo  m-auto mt-5 ">
 

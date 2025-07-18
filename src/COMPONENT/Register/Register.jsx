@@ -35,6 +35,13 @@ export function Register() {
    let myNavegeate =  useNavigate()
 
 
+   let scrollTop = ()=>{
+    window.scrollTo({
+        top : 0 , 
+        behavior : 'smooth'
+    })
+   }
+
 
 let myFormik = useFormik( {
     initialValues : {
@@ -53,6 +60,8 @@ let myFormik = useFormik( {
     onSubmit : async function (values) {
 
         setIsLoding(true)
+        
+        scrollTop()
 
 
         const { data } = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
@@ -65,7 +74,7 @@ let myFormik = useFormik( {
                 setIsSacces(false)
                 setIsLoding(false)
                 myNavegeate("/Login")
-            } , 3000 )
+            } , 1500 )
             
 
 

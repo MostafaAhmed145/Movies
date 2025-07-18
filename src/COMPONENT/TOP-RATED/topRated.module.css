@@ -19,6 +19,15 @@
 }
 
 
+.watchTheMovie{
+    transition: all 0.7s;
+}
+
+.watchTheMovie:hover{
+    transform: scale(1.02);
+}
+
+
 
 .innar figure:hover .text{
     transform: translateY(0);

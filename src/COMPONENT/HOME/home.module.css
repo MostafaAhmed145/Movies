@@ -13,60 +13,14 @@ body{
 
 
 
-/* .mainCol figure::after{
-    content: "";
-    position: absolute;
-    background-color: #ff4081;
-    width: 2px;
-    left: 0;
-    animation: anim 2s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-.mainCol figure::before{
-    content: "";
-    position: absolute;
-    background-color: #ff4081;
-    width: 2px;
-    right: 0;
-    animation: animBifour 2s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-@keyframes anim {
-    0%{
-height: 0%;
-    }
-
-    100%{
-        height: 100%;
-    }
-}
-
-@keyframes animBifour {
-    0%{
-height: 0%;
-    }
-
-    100%{
-        height: 100%;
-    }
-} */
-
 
 
 .innar{
     overflow: hidden;
+
 }
 
-.text{
-    transform: translateY(100%);
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: 0.7s all;
-    
-}
+
 
 
 
@@ -77,17 +31,22 @@ height: 0%;
 }
 
 .mainCol figure:hover img{
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.1) rotate(2deg);
 }
 
 .text {
     transform: translateY(100%);
+    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) ;
     opacity: 0;
     transition: 0.5s ease-in-out;
+      filter: blur(10px);
+
 }
 
 .mainCol figure:hover .text {
     transform: translateY(0);
+    filter: blur(0);
     opacity: 1;
 }
 
@@ -127,6 +86,15 @@ h1::after {
 h1:hover {
     transform: translateY(-10px) scale(1.1);
     text-shadow: 0 0 20px rgba(255, 64, 129, 0.7), 0 0 40px rgba(255, 64, 129, 0.5);
+}
+
+.watchTheMovie{
+    transition: all 0.7s;
+}
+
+.watchTheMovie:hover{
+    transform: scale(1.02);
+    
 }
 
 

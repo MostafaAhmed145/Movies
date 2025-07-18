@@ -51,9 +51,13 @@ function NavBar() {
       </ul>
       
     </div>
-    <div className=' py-2' style={ {"cursor" : "pointer" } }>
+    {localStorage.getItem("tkn") ? <div className=' py-2' style={ {"cursor" : "pointer" } }>
                     <span  onClick={signOut} className=' p-2 rounded-1 text-danger' > <i class="fa-solid fa-right-from-bracket text-danger"></i> Sign out</span>
-                </div>
+                </div> : "" }
+               
+
+               
+                
   </div>
 
 </nav>

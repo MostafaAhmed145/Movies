@@ -59,6 +59,16 @@
 }
 
 
+.watchTheMovie{
+    transition: all 0.7s;
+
+}
+
+.watchTheMovie:hover{
+    transform: scale(1.02);
+
+}
+
 
 
 @media screen and (min-width : 768px) {
