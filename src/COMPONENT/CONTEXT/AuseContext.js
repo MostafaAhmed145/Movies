@@ -10,9 +10,10 @@ import React, {  createContext, useState } from 'react'
 
      let [ Token , setToken ] =   useState(null)
      let [ btnscroll , setBtnscroll ] =   useState(null)
+     let [idPerson , setIdPerson ] = useState(null)  
+     let [amendentImg , setAmendentImg ] = useState(null)  
 
-
-    return <myContext.Provider value={ { myToken : Token  , setToken , btnscroll , setBtnscroll } } >
+    return <myContext.Provider value={ { myToken : Token  , setToken , btnscroll , setBtnscroll , idPerson , setIdPerson , amendentImg , setAmendentImg } } >
     
        {children}
 

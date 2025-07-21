@@ -16,6 +16,11 @@ import {  RotatingLines } from 'react-loader-spinner';
 export function Register() {
                 
     
+    let [showPassword , setShowPassword] = useState(false)
+
+    let handelShowPassword = ()=>{
+                setShowPassword(prev => !prev )
+    }
 
 
     let refrance = useRef(null)
@@ -64,10 +69,9 @@ let myFormik = useFormik( {
         scrollTop()
 
 
-        const { data } = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
+            await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signup", values)
         .then( (res)=>{
 
-            console.log("res" , res);
             setIsSacces(true)
 
             setTimeout( ()=>{
@@ -80,7 +84,6 @@ let myFormik = useFormik( {
 
         } ).catch( (error)=>{
 
-            console.log("eror" , error);
 
             setIsFeal(error.response.data.message)
 
@@ -91,10 +94,7 @@ let myFormik = useFormik( {
             
         } )
 
-            console.log(data);
 
-        
-        
         
     },
 
@@ -219,9 +219,12 @@ let myFormik = useFormik( {
                     
                     {myFormik.values.email !== false && myFormik.touched.email ? <p className=' text-danger  '>{myFormik.errors.email}</p> : "" }
                     
-
-                    
-                    <input onBlur={myFormik.handleBlur} className={RegisterCss.password + " mb-2  p-1 rounded w-100  text-black bg-transparent" } placeholder='Password' value={myFormik.values.password} onChange={myFormik.handleChange} type="password" id='password'  />
+                     <input  onBlur={myFormik.handleBlur}
+                       className={RegisterCss.password + " mb-2  p-1 rounded w-100  text-black bg-transparent" } 
+                        placeholder='Password' value={myFormik.values.password} onChange={myFormik.handleChange} 
+                        type={showPassword ? 'text' : 'password' } 
+                         id='password'/>
+                         
                     
                     
                     {myFormik.values.password !== false && myFormik.touched.password ? <p className=' text-danger  '>{myFormik.errors.password}</p> : "" }
@@ -229,7 +232,7 @@ let myFormik = useFormik( {
 
                     
                     {/* <label className={RegisterCss.label + " px-2 text-black"} htmlFor="rePassword">RePassword</label> */}
-                    <input onBlur={myFormik.handleBlur} className={RegisterCss.rePassword + " mb-2  p-1 rounded w-100  bg-transparent" } placeholder='rePassword' value={myFormik.values.rePassword} onChange={myFormik.handleChange} type="password" id='rePassword'  />
+                    <input onBlur={myFormik.handleBlur} className={RegisterCss.rePassword + " mb-2  p-1 rounded w-100  bg-transparent" } placeholder='rePassword' value={myFormik.values.rePassword} onChange={myFormik.handleChange} type={ showPassword ? "text" : "password" } id='rePassword'  />
                     
                     {myFormik.values.rePassword !== false && myFormik.touched.rePassword ? <p className=' text-danger    '>{myFormik.errors.rePassword}</p> : ""  }
                     
@@ -241,8 +244,11 @@ let myFormik = useFormik( {
                     {myFormik.values.phone !== false && myFormik.touched.phone ? <p className=' text-danger w-100 '>{myFormik.errors.phone}</p> : ""  }
                     
 
-                    <span className='d-block'>Already have an account?<Link to="/Login"> Log in</Link></span>
-                                        
+                    <div className="d-flex justify-content-between">
+                        <span className='d-block'>Already have an account?<Link to="/Login"> Log in</Link></span>
+                        {showPassword ? <i onClick={handelShowPassword} style={{ "cursor"  : " pointer"}} className='fa-solid fa-eye-slash'></i> : <i onClick={handelShowPassword} style={{ "cursor"  : " pointer"}} className='fa-solid fa-eye'></i> }
+                        
+                    </div>
                     
 
                     <div className=' col-lg-6 col-md-12  mt-4 m-auto'>

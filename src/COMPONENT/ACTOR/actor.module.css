@@ -1,25 +1,20 @@
-/* 
-.ul{
-    flex-wrap: wrap;
-} */
 
-.ul li{
-    position: relative;
+.biography{
+    max-height: 400px;
+    overflow: auto;
+}
+.biography::-webkit-scrollbar{
+    width: 8px;
 }
 
-.ul li{
-    background-color: #00d30b;
+.biography::-webkit-scrollbar-track{
+    background-color: #f8f7f7;
+    border: 1px solid #0011ffcc;
+    border-radius: 15px;
 }
 
-.ul li::after {
-    content: "";
-
-position: absolute;
-left: -20px;
-top: 50%;
-transform: translateY(-50%);
-border-bottom: 9px solid transparent;
-border-top: 9px solid transparent;
-border-left: 9px solid rgb(255, 0, 0);
-border-right: 9px solid transparent;
+.biography::-webkit-scrollbar-thumb{
+    background-color: #0011ffcc;
+    width: 8px;
+    border-radius: 15px;
 }

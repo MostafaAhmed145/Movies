@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay, Navigation , EffectCoverflow } from 'swiper/modules'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import ButtonScrolTop from '../BUTTON-SCROL/ButtonScrolTop'
 
 
 
@@ -26,8 +27,17 @@ function Detailse() {
 
     let myNavigate = useNavigate()
 
+
+                let toScrollTop = ()=>{
+                    window.scrollTo( {
+                        top : 0 , 
+                        behavior : 'smooth'
+                    } )
+                }
+
     useEffect( ()=>{
         Aos.init( {duration : 3000} )
+        toScrollTop()
     } , [] )
 
 
@@ -54,7 +64,6 @@ function getCast() {
 
 let {  data , isError , isLoading , refetch} = useQuery("getDetailseMovei" , getDetailseMovei)
 
-console.log("sjhsw" , idCastMovie );
 
 
 let dataSimilar = useQuery( "similar" , similar )
@@ -82,12 +91,7 @@ let { data : getDataCast , isLoading : getLoading   } = useQuery( ["getCast" , i
                 const moveis = detailseMovei !== null ? detailseMovei : data.data
 
 
-                let toScrollTop = ()=>{
-                    window.scrollTo( {
-                        top : 0 , 
-                        behavior : 'smooth'
-                    } )
-                }
+                
 
 
 
@@ -214,7 +218,6 @@ let { data : getDataCast , isLoading : getLoading   } = useQuery( ["getCast" , i
                         return <SwiperSlide key={similarMovei.id} className=' h-100 '>
                                     <figure onClick={ ()=>  { setDetailseMovei(similarMovei) ; setIdCastMovie(similarMovei.id ) ; toScrollTop() }} >
                                         <LazyLoadImage className=' w-100 rounded-3 h-100' src={"https://image.tmdb.org/t/p/original" + similarMovei.backdrop_path} loading='lazy' alt={similarMovei.original_title}  />
-
                                     </figure>
                         </SwiperSlide>
                     } )}
@@ -259,7 +262,11 @@ let { data : getDataCast , isLoading : getLoading   } = useQuery( ["getCast" , i
                     <button onClick={ NavigateM } className=' btn btn-danger text-white w-100 '>Back to Home Page</button>
             </div>
 
+            <ButtonScrolTop/>
+
     </div>
+
+
     
     </>
 }

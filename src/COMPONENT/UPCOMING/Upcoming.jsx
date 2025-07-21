@@ -55,7 +55,7 @@ export function Upcoming() {
                            <div className='border-bottom  rounded shadow border '>
                              <Link to={`/Detailse/${upcoming.id}`}>
                             
-                            <div data-aos="zoom-in-up" className={UpcomingCss.innar + " rounded-top-3  position-relative"}>
+                            <div data-aos="zoom-in-up" style={{"height": "400px"}} className={UpcomingCss.innar + " rounded-top-3  position-relative"}>
 
                                     <figure className=' position-relative h-100 '>
                                     <LazyLoadImage className='rounded-top-3 w-100 h-100'  src={"https://image.tmdb.org/t/p/original" + upcoming.backdrop_path} alt={upcoming.name} />

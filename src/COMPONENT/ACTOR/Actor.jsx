@@ -1,7 +1,7 @@
 
 
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Loading from '../LOADING/Loading'
@@ -9,18 +9,24 @@ import ActorCss from "./actor.module.css"
 import Aos from 'aos'
 import "aos/dist/aos.css"
 import Errors from '../ERRORS/Errors'
+import { myContext } from '../CONTEXT/AuseContext'
+import ImagesPerson from './ImagesPerson'
 
 
 function Actor() {
 
     let myNavigate = useNavigate()
+    
+    let { id , name } = useParams() 
+
+    let {  setIdPerson , amendentImg  } = useContext(myContext)
 
     useEffect( ()=>{
+        setIdPerson(id)
     Aos.init({duration : 3000})
     } , [] )
 
 
-    let { id , name } = useParams()
 
 
         async function aboutTheActor() {
@@ -29,11 +35,18 @@ function Actor() {
 
         }
 
-        let { data , isError , isLoading , refetch } = useQuery("aboutTheActor" , aboutTheActor)
+       
+
+        let { data , isError , isLoading , refetch } = useQuery("aboutTheActor" , aboutTheActor )
+        
 
         if (isLoading ) {
             return <Loading/>
         }
+
+
+
+   
 
         function back() {
             myNavigate("/People")
@@ -49,30 +62,56 @@ function Actor() {
 
     <div className="container mt-4">
     <h1 data-aos="flip-up" > {name} </h1>
-    <div data-aos="zoom-in-up" className="row p-4 bg-white m-3 rounded-4 position-relative">
+    <div data-aos="zoom-in-up" className="row p-4 bg-white m-3 rounded-4 border">
 
            <div className="col-lg-4 col-md-12">
-                <figure className=' h-100'>
-                    <img className=' h-100 w-100 rounded-3' src={"https://image.tmdb.org/t/p/original" + data.data.profile_path} alt={data.data.name} />
-                </figure>
+                <div className=' h-100'>
+                    <img className=' h-100 w-100 rounded-3' style={{ objectFit: "cover", maxHeight: "450px" , "cursor" : "pointer"}} src={`https://image.tmdb.org/t/p/original${amendentImg ? amendentImg : data.data.profile_path }` } alt={data.data.name} />
+                </div>
                 </div>
                 <div className="col-lg-8 col-md-12 px-3">
-                <figcaption>
-                    <h2 style={{color : "#00d30b"}}>{data.data.name}</h2>
-                    <p>{data.data.biography}</p>
-                    <ul className={ActorCss.ul }>
-                        <li className=' col-lg-4 col-md-12 mb-1 text-white fw-bold p-2 rounded-1 '><span style={{textDecoration : "underline" , textDecorationThickness : "2px"}}>birthday</span> : {data.data.birthday  }  </li>
-                        <li className=' col-lg-4 col-md-12 mb-1 text-white fw-bold p-2 rounded-1'><span style={{textDecoration : "underline" , textDecorationThickness : "2px"}}>place of birth</span> : {data.data.place_of_birth  }  </li>
-                        <li className=' col-lg-4 col-md-12  text-white fw-bold p-2 rounded-1'><span style={{textDecoration : "underline" , textDecorationThickness : "2px"}}>popularity</span> : {data.data.popularity }  </li>
-                        <Link to={data.data.homepage }> {data.data.homepage} </Link>   
-                    </ul>
-                </figcaption>
+                <div className=' actor-details'>
+                    <h2 className=' fst-italic text-primary'>{data.data.name}</h2>
+                    <p data-aos="fade-up" className={ActorCss.biography + " mb-4"}>{data.data.biography} {data.data.biography} {data.data.biography}</p>
+                    <div className="row mb-2">
+                        <div className="col-lg-4 col-md-6 col-sm-12 ">
+                            <div className=' shadow border rounded-1 text-center p-2'>
+                                <span><i className="fa-regular fa-calendar-days me-1 text-secondary"></i> Date of Birth </span>
+                            <h4 className=' h6 text-primary'>{data.data.birthday}</h4>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-4 col-md-6 col-sm-12 ">
+                            <div className=' shadow border rounded-1 text-center p-2'>
+                                <span><i className="fa-solid fa-location-dot me-1 text-secondary"></i> place of birth </span>
+                                <h4 className=' h6 text-primary'>{data.data.place_of_birth || "N/A"}</h4>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-4 col-md-6 col-sm-12 ">
+                            <div className="shadow border rounded-1 text-center p-2">
+                                <span><i className="fa-solid fa-fire me-1 text-secondary"></i> popularity </span>
+                                {/* <h4 className={ ' h6 text-primary    }>{data.data.popularity || "N/A"}</h4> */}
+                                    <h4 className={` h6 ${data.data.popularity > 10 ? " text-danger" : data.data.popularity >= 7 ? " text-warning" : " text-secondary"} `} >{Math.floor(data.data.popularity) || "N/A"}</h4>
+                            </div>
+                            
+                        </div>
+
+                        {data.data.homepage ? <Link to={data.data.homepage } className=' btn btn-outline-primary my-2'> to home page </Link> : ""}
+
+
+
+                    </div>
+
+                        <ImagesPerson/>
+                </div>
                 </div>
 
-                <div onClick={back} style={{backgroundColor : "red" , width : "fit-content" , cursor : "pointer"}} className="back position-absolute start-0 bottom-0 text-white p-2 rounded-end-2">
-                <i  class="fa-solid fa-arrow-left fa-1x"></i>
-                </div>
+                
     </div>
+                <div onClick={back} style={{cursor : "pointer"}} className="back btn btn-danger mb-2 w-100 text-center">
+                    <span className=' text-capitalize'> <i  class="fa-solid fa-arrow-left fa-1x"></i> back to home page </span>
+                </div>
 
     </div>    
     </>

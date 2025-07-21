@@ -22,7 +22,7 @@ import { myContext } from '../CONTEXT/AuseContext'
 export function Home() {
 
 
-let { btnscroll , setBtnscroll } = useContext(myContext)
+let {  setBtnscroll } = useContext(myContext)
 
     async function grtDataMovie(){
 
@@ -37,7 +37,7 @@ let { btnscroll , setBtnscroll } = useContext(myContext)
         useEffect( ()=>{
             Aos.init( {duration : 2500} )
             setBtnscroll()
-        } , [] )
+        } , [setBtnscroll] )
         
         if (isLoading ) {
         return <Loading/>
@@ -71,7 +71,7 @@ let { btnscroll , setBtnscroll } = useContext(myContext)
                            <div className='border-bottom  rounded shadow border'>
                              <Link to={`/Detailse/${movie.id}`}>
                             
-                            <div data-aos="zoom-in-up" className={homeCss.innar + " rounded-top-3  position-relative "}>
+                            <div data-aos="zoom-in-up" style={{"height": "400px"}} className={homeCss.innar + " rounded-top-3  position-relative "}>
 
                                     <figure className=' position-relative h-100 '>
                                     <LazyLoadImage className='rounded-top-3 w-100 h-100'  src={"https://image.tmdb.org/t/p/original" + movie.backdrop_path} alt={movie.name} />

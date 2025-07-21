@@ -47,8 +47,7 @@ let myFormik = useFormik( {
 
         setIsLoding(true)
 
-
-        const { data } = await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", values)
+         await axios.post("https://ecommerce.routemisr.com/api/v1/auth/signin", values)
         .then( (res)=>{
 
 
